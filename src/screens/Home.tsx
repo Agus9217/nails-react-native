@@ -1,35 +1,53 @@
-import { StyleSheet, Text, View } from "react-native";
-import { FontAwesome5 } from "@expo/vector-icons";
+import { FlatList, StyleSheet, Text, View } from "react-native";
+
+import PagerView from "react-native-pager-view";
 import React from "react";
+import Header from "../components/Header";
+import Card from "../components/Card";
+
+const faces = [
+  {
+    id: 1,
+    imageUrl: "https://avatars.githubusercontent.com/u/11941409?v=3",
+  },
+  {
+    id: 2,
+    imageUrl: "https://avatars.githubusercontent.com/u/11949709?v=4",
+  },
+  {
+    id: 3,
+    imageUrl: "https://avatars.githubusercontent.com/u/11949809?v=4",
+  },
+  {
+    id: 4,
+    imageUrl: "https://avatars.githubusercontent.com/u/11949919?v=4",
+  },
+  {
+    id: 5,
+    imageUrl: "https://avatars.githubusercontent.com/u/11949949?v=4",
+  },
+];
 
 export default function Home() {
   return (
     <View style={styles.container}>
-      {/* Header */}
-      <View style={styles.header}>
-        <View style={styles.header__content}>
-          <Text style={styles.header__text}>Hello Nadia,</Text>
-          <View style={styles.icon__content}>
-            <FontAwesome5
-              style={styles.icon}
-              name="heart"
-              size={24}
-              color="black"
-            />
-            <FontAwesome5
-              style={styles.icon}
-              name="bell"
-              size={24}
-              color="black"
-            />
-          </View>
-        </View>
-      </View>
+      <Header />
 
       {/* Main */}
       <View style={styles.main}>
         <View style={styles.main__content}>
-          <Text>Upcoming Appointment</Text>
+          <Text style={styles.main__content_title}>Upcoming Appointment</Text>
+        </View>
+        <FlatList
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          data={faces}
+          renderItem={({ item }) => <Card src={item.imageUrl} />}
+          pagingEnabled
+          snapToAlignment="center"
+        />
+        <View style={styles.footer}>
+
         </View>
       </View>
     </View>
@@ -40,33 +58,23 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  header: {
-    flex: 0.15,
-    justifyContent: 'flex-end',
-    marginBottom: 25
-  },
-  header__text: {
-    fontSize: 25,
-    fontWeight: "300",
-  },
-  header__content: {
-    paddingHorizontal: 15,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
-  icon__content: {
-    flexDirection: "row",
-    gap: 20,
-  },
-  icon: {
-    padding: 15,
-    backgroundColor: "#fff",
-    borderRadius: 10,
-  },
   main: {
     flex: 1,
-    backgroundColor: "tomato",
   },
-  main__content: {},
+  main__content: {
+    paddingHorizontal: 15,
+  },
+  main__content_title: {
+    fontSize: 20,
+  },
+  slider: {
+    flex: 1,
+  },
+  slider__content: {
+    flex: 1,
+  },
+  footer: {
+    backgroundColor: 'green',
+    flex: 15
+  }
 });
